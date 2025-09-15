@@ -1,0 +1,33 @@
+// LOCALHOST
+### Get all contacts
+GET http://localhost:3000/users
+
+### Get contact by Id
+GET http://localhost:3000/users/6828d39ed7dddad9c007e9e3
+
+### Create contact
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Charles",
+    "lastName": "Xavier",
+    "email": "xCharles@xmen.com",
+    "favoriteColor": "white",
+    "birthday": "07/13/1932"
+}
+
+### PUT contact
+PUT http://localhost:3000/users/6828d39ed7dddad9c007e9e3 HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Erik",
+    "lastName": "Lehnsherr",
+    "email": "elehnsherr@magneto.com",
+    "favoriteColor": "purple",
+    "birthday": "08/08/1930"
+}
+
+### DELETE contact
+DELETE http://localhost:3000/users/6828d39ed7dddad9c007e9e3 HTTP/1.1
