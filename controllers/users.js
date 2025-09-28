@@ -3,7 +3,11 @@ const ObjectId = require("mongodb").ObjectId;
 
 const getAll = async (req, res) => {
   // #swagger.tags=['Users']
-  const result = await mongodb.getDatabase().db().collection("users").find();
+  const result = await mongodb
+    .getDatabase()
+    .db()
+    .collection("crud users")
+    .find();
   result.toArray().then((users) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(users);
@@ -13,7 +17,11 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
   // #swagger.tags=['Users']
   const userId = new ObjectId(req.params.id);
-  const result = await mongodb.getDatabase().db().collection("users").find();
+  const result = await mongodb
+    .getDatabase()
+    .db()
+    .collection("crud users")
+    .find();
   result.toArray().then((users) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(users[0]);
@@ -32,7 +40,7 @@ const createUser = async (req, res) => {
   const response = await mongodb
     .getDatabase()
     .db()
-    .collection("users")
+    .collection("crud users")
     .insertOne(user);
   if (response.acknowledged > 0) {
     res.status(204).send();
@@ -55,7 +63,7 @@ const updateUser = async (req, res) => {
   const response = await mongodb
     .getDatabase()
     .db()
-    .collection("users")
+    .collection("crud users")
     .replaceOne({ _id: userId }, user);
   if (response.modifiedCount > 0) {
     res.status(204).send();
@@ -72,7 +80,7 @@ const deleteUser = async (req, res) => {
   const response = await mongodb
     .getDatabase()
     .db()
-    .collection("users")
+    .collection("crud users")
     .deleteOne({ _id: userId }, true);
   if (response.deletedCount > 0) {
     res.status(204).send();
