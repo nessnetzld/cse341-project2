@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo"); // Stores sessions in MongoDB
 const GitHubStrategy = require("passport-github2").Strategy;
 const passport = require("passport");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -38,8 +39,12 @@ app.use((req, res, next) => {
 });
 
 // Middleware
-app.use(cors({ methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"] }));
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  })
+);
 app.use("/", require("./routes"));
 
 passport.use(
