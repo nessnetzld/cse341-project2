@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("./data/database");
 const session = require("express-session");
+const MongoStore = require("connect-mongo"); // Stores sessions in MongoDB
 const GitHubStrategy = require("passport-github2").Strategy;
 const passport = require("passport");
 const cors = require("cors");
@@ -15,7 +16,8 @@ app.use(
   session({
     secret: "secret",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   })
 );
 
